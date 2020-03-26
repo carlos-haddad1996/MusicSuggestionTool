@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../logo.svg';
 import '../../App.css';
 import Button from '../general/buttons/buttons';
+// import { Button } from 'bootstrap';
 
 function App() {
     return (

@@ -7,7 +7,11 @@ const Button = () => {
 
     return (
         <div>
-            <button onClick={onClickButton} styles={{ color: 'red' }}>
+            <button
+                type="button"
+                onClick={onClickButton}
+                className="btn btn-primary"
+            >
                 Click Me
             </button>
         </div>
