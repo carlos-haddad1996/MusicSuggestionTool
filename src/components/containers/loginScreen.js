@@ -23,21 +23,12 @@ class LoginScreen extends Component {
 
     componentWillMount() {
         this.getSpotifyCategories();
-        this.getPlaylists();
     }
 
     getSpotifyCategories() {
         spotifyApi.getCategories().then(response => {
             this.setState({
                 items: response.categories.items
-            });
-        });
-    }
-
-    getPlaylists() {
-        spotifyApi.getCategoryPlaylists('pop').then(response => {
-            this.setState({
-                playlists: response.playlists.items
             });
         });
     }
@@ -70,14 +61,14 @@ class LoginScreen extends Component {
         let { loggedIn, playlists, items } = this.state;
         return (
             <div>
-                {loggedIn ? (
-                    <PlaylistScreen playlists={playlists} items={items} />
-                ) : (
+                {!loggedIn ? (
                     <a href="http://localhost:8888">
                         <button className="btn btn-primary">
                             Login To Spotify
                         </button>
                     </a>
+                ) : (
+                    <PlaylistScreen spotifyApi={spotifyApi} items={items} />
                 )}
             </div>
         );
