@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
-import '../../App.css';
-import Button from '../general/buttons/buttons';
-// import { Button } from 'bootstrap';
+import PlaylistScreen from './playlistScreen';
 
 const spotifyApi = new SpotifyWebApi();
 
-class App extends Component {
+class LoginScreen extends Component {
     constructor() {
         super();
         const params = this.getHashParams();
@@ -17,8 +15,31 @@ class App extends Component {
         }
         this.state = {
             loggedIn: token ? true : false,
-            nowPlaying: { name: 'Not Checked', albumArt: '' }
+            nowPlaying: { name: 'Not Checked', albumArt: '' },
+            items: {},
+            playlists: {}
         };
+    }
+
+    componentWillMount() {
+        this.getSpotifyCategories();
+        this.getPlaylists();
+    }
+
+    getSpotifyCategories() {
+        spotifyApi.getCategories().then(response => {
+            this.setState({
+                items: response.categories.items
+            });
+        });
+    }
+
+    getPlaylists() {
+        spotifyApi.getCategoryPlaylists('pop').then(response => {
+            this.setState({
+                playlists: response.playlists.items
+            });
+        });
     }
 
     getHashParams() {
@@ -46,29 +67,21 @@ class App extends Component {
     }
 
     render() {
+        let { loggedIn, playlists, items } = this.state;
         return (
-            <div className="App">
-                <a href="http://localhost:8888">Login To Spotify</a>
-                <div>Now Playing: {this.state.nowPlaying.name}</div>
-                <div>
-                    <img
-                        alt="album art"
-                        src={this.state.nowPlaying.albumArt}
-                        style={{ height: 150 }}
-                    />
-                </div>
-                <div>
-                    {this.state.loggedIn ? (
-                        <button onClick={() => this.getNowPlaying()}>
-                            Check Now Playing
+            <div>
+                {loggedIn ? (
+                    <PlaylistScreen playlists={playlists} items={items} />
+                ) : (
+                    <a href="http://localhost:8888">
+                        <button className="btn btn-primary">
+                            Login To Spotify
                         </button>
-                    ) : (
-                        <div>Not Logged In</div>
-                    )}
-                </div>
+                    </a>
+                )}
             </div>
         );
     }
 }
 
-export default App;
+export default LoginScreen;
