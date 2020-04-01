@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Popper from 'popper.js';
 import './index.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import App from '../src/components/general/App';
+import App from '../src/components/App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
