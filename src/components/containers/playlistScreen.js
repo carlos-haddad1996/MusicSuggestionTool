@@ -48,7 +48,7 @@ const PlaylistScreen = ({ spotifyApi, items }) => {
                                     key={item.id}
                                     className="col mb-4 card-padding"
                                 >
-                                    <div className="card text-dark">
+                                    <div className="card text-white card-background">
                                         <div className="card-img-top">
                                             <img
                                                 alt="name"
