@@ -10,7 +10,6 @@ class LoginScreen extends Component {
         super();
         const params = this.getHashParams();
         const token = params.access_token;
-        console.log('params', params);
         if (token) {
             spotifyApi.setAccessToken(token);
         }
@@ -59,7 +58,7 @@ class LoginScreen extends Component {
     }
 
     render() {
-        let { loggedIn, playlists, items } = this.state;
+        let { loggedIn, items } = this.state;
         return (
             <div className="position-relative">
                 {!loggedIn ? (
