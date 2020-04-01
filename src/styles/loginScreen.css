@@ -1,0 +1,13 @@
+.wrapped-container {
+    padding: 35px;
+}
+
+.loggin-container {
+    margin-top: 70px;
+}
+
+.button-size {
+    height: 65px;
+    width: 170px;
+    font-size: 18px;
+}
