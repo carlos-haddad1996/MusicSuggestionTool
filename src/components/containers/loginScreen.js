@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import PlaylistScreen from './playlistScreen';
+import '../../styles/loginScreen.css';
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -60,13 +61,20 @@ class LoginScreen extends Component {
     render() {
         let { loggedIn, playlists, items } = this.state;
         return (
-            <div>
+            <div className="position-relative">
                 {!loggedIn ? (
-                    <a href="http://localhost:8888">
-                        <button className="btn btn-primary">
-                            Login To Spotify
-                        </button>
-                    </a>
+                    <div className="column">
+                        <div>
+                            <h1>Login With Your Spotify Credentials</h1>
+                        </div>
+                        <div className="loggin-container">
+                            <a href="http://localhost:8888">
+                                <button className="btn btn-success rounded-pill button-size shadow p-3 mb-5">
+                                    Login To Spotify
+                                </button>
+                            </a>
+                        </div>
+                    </div>
                 ) : (
                     <PlaylistScreen spotifyApi={spotifyApi} items={items} />
                 )}
